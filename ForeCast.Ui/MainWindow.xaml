@@ -1,0 +1,96 @@
+﻿<Window x:Class="ForeCast.Ui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ForeCast.Ui" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="450" MinWidth="400">
+    <Grid Margin="10">
+        <!-- City input and label -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="searchholder" VerticalAlignment="Top" Margin="5,0,0,10" Height="30" Text="type your city here....." FontSize="18"/>
+        <TextBox x:Name="search" Background="Transparent" Text="{Binding City , Mode=TwoWay}" Height="30" VerticalAlignment="Top" Margin="0,0,50,5" FontSize="18" GotFocus="search_GotFocus" LostFocus="search_LostFocus" TextChanged="search_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button Width="40" BorderBrush="Black" Background="Black" Foreground="White" Height="30" Margin="0,0,0,10" Content="Go" Command="{Binding GetWeatherInfoCommand}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Right" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
+        <!-- Weather Info and button in grid layout -->
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Get Weather Info button -->
+
+
+            <!-- Temperature -->
+            <TextBlock Text="Temperature:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Text="{Binding WeatherInfo.Current.Temp_C}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Foreground="#FF5A6CE5" FontSize="18" />
+
+            <!-- Feels Like -->
+            <TextBlock Text="Feels Like:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Foreground="Blue" Text="{Binding WeatherInfo.Current.Feelslike_C}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontSize="18" />
+
+            <!-- Pressure -->
+            <TextBlock Text="Pressure:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Text="{Binding WeatherInfo.Current.Pressure_MB}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Foreground="Blue" />
+
+            <!-- Humidity -->
+            <TextBlock Text="Humidity:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Text="{Binding WeatherInfo.Current.Humidity}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Foreground="Blue" />
+
+            <!-- Wind Speed -->
+            <TextBlock Text="Wind Speed:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Text="{Binding WeatherInfo.Current.Wind_Kph}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Foreground="Blue" />
+
+            <!-- Country -->
+            <TextBlock Text="Country:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Text="{Binding WeatherInfo.Location.Country}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Foreground="Blue" />
+
+            <!-- City -->
+            <TextBlock Text="City:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16" />
+            <TextBlock Text="{Binding WeatherInfo.Location.Name}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" FontSize="18" Foreground="Blue" />
+
+            <!-- Dummy text block for spacing at the bottom -->
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <TextBlock Height="30" Foreground="Red" Text="{Binding Response}" FontSize="16"/>
+            <TextBlock Height="30" Foreground="Green" Text="{Binding Response}" FontSize="16"/>
+        </Grid>
+    </Grid>
+</Window>
